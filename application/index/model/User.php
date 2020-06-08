@@ -14,12 +14,25 @@ class User extends Model {
 		$is_admins = ['0' => '不是管理员', '1' => '是管理员'];
 		return $is_admins[$val];
 	}
-	/*
-		       获取所有用户信息
-	*/
-	public static function getUserList() {
-		$user_list = Db::table('user')->select();
-		return $user_list;
+	/**
+	 *分页获取所有用户列表
+	 * @Author   王雪
+	 * @DateTime 2020-06-08T11:37:37+0800
+	 * @return   [type]                   [description]
+	 */
+	public static function getUserList($pageSize = 2) {
+		/*$userlist = model('User')
+					->where("name like '%{$name}%'")
+					->paginate(
+						12,
+						false,
+						['query' => request()->param(),]
+		);*/
+		$data['data'] = User::paginate($pageSize);
+		$data['pageSize'] = $pageSize;
+		//var_dump($data->render());
+		//$page = $news->render();
+		return $data;
 	}
 
 	public static function getOneUser($uid) {

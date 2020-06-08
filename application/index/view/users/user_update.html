@@ -34,8 +34,10 @@ $("#ff").submit(function(){
         function(res){
             var data = JSON.parse(res);
             if(data.code=="200"){
-                // console.log("go this");return;
+                alert(data.message);
                 window.location.href="{:url('users/index')}";
+            }else{
+                alert(data.message);
             }
         }
         );

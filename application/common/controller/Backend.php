@@ -75,10 +75,6 @@ class Backend extends Controller {
 		return $urls;
 	}
 
-	public function returnJson($code = 0, $message = "", $data = []) {
-		return $this->result($data, $code = $code, $msg = $message, $type = 'json');
-	}
-
 	//判断登录
 	public function do_login($username, $password) {
 
@@ -108,7 +104,6 @@ class Backend extends Controller {
 	 * @return   void
 	 */
 	public function is_layout() {
-		//var_dump($this->request->action());
 		if (in_array($this->request->action(), $this->noNeedLogin)) {
 			$this->view->engine->layout(false);
 		}

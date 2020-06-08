@@ -36,3 +36,7 @@ function ReturnJsonData($code = null, $message = null, $success = false, $data =
 	}
 	return json_encode($data, JSON_UNESCAPED_UNICODE);
 }
+
+/*function returnJson($code = 0, $message = "", $data = []) {
+return $this->result($data, $code = $code, $msg = $message, $type = 'json');
+}*/

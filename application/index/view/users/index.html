@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title></title>
 </head>
 <body>
     <div id="content">
         用户展示列表
-    
+    <form>
         <table border='1px solid red' width='500px'>
             <th>用户名</th>
             <th>是否管理员</th>
             <th>密码</th>
             <th>修改</th>
             
-            {foreach $userlist as $vo}
+            {foreach $userlist['data'] as $vo}
             <tr>
                 <td>{$vo.username} </td>
                 <td>{$vo.is_admin} </td>
@@ -27,12 +28,48 @@
             </tr>
             {/foreach}    
         </table>
+<ul class="pagination">
+  <li><a href="#">&laquo;</a></li>
+  <li><a href="#">1</a></li>
+  .......
+</ul>
+        <div id="page">
+
+            {$userlist['data']->render()}
+            当前页数<br />
+            每页显示条<input type="text" name="pageSize" id="pageSize" value="{$userlist['pageSize']}" onblur="page()">条数据
+        </div>
+    </form>
     </div>
 <script type="text/javascript">
     function updateId(id){
         // console.log(id);
         window.location.href="{:url('users/user_update')}?id="+id;
     }
+
+    function page(){
+        var pageSize = $('#pageSize').val();//每页多少条
+        window.location.href="{:url('users/index')}?pageSize="+pageSize;
+        alert(pageSize);
+    }
+    /**
+     * 分页失去焦点的时候
+     * @Author   王雪
+     */
+    /*$("#pageSize").blur(function(){
+        var pageSize = $('#pageSize').val();//每页多少条
+        //alert(pageSize);return;
+        $.get(
+            "{:url('users/index')}",
+            {
+                'page':3,
+                'pageSize':pageSize
+            },
+            function(res){
+                alert(res);
+            }
+        );
+    });*/
 </script>
 </body>
 </html>

@@ -4,7 +4,6 @@ namespace app\index\controller;
 use app\common\controller\Backend;
 use app\index\model\User;
 use think\Controller;
-use think\Session;
 
 /*
 用户展示
@@ -13,13 +12,12 @@ class Users extends Backend {
 
 	//获取该用户的下面的人
 	function index() {
-		//调用无限极函数
-		$userlist = User::getUserList(Session::get('id'));
-		//var_dump($userlist);
-		//查询用户页面
+		$pageSize = input('get.pageSize') ? input('get.pageSize') : 1;
+		//var_dump($pageSize);
+		$userlist = User::getUserList($pageSize);
+		//var_dump($userlist);die;
 		$this->assign('userlist', $userlist);
-
-		//var_dump($userlist);
+		//return ReturnJsonData($code = 200, $message = "success", true, $userlist);
 		return $this->fetch();
 	}
 
