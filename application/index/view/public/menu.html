@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单栏</title>
+</head>
+<body>
+    <div id="menu">
+    {foreach $urlnames as $vo}
+       <a href="{:url($vo['url'])}">{$vo['access_name']}</a><br />
+    
+    {/foreach}
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="content">
+        用户展示列表
+    
+        <table border='1px solid red' width='500px'>
+            <th>用户名</th>
+            <th>是否管理员</th>
+            <th>密码</th>
+            <th>修改</th>
+            
+            {foreach $userlist as $vo}
+            <tr>
+                <td>{$vo.username} </td>
+                <td>{$vo.is_admin} </td>
+                <td>{$vo.password} </td>
+                <form action="{:url('users/user_update')}" method="get">
+                    <td> 
+                        <input type="hidden" value="{$vo.id}" name="id">
+                        <input type="submit" value="">
+                    </td>
+                </form>
+            </tr>
+            {/foreach}    
+        </table>
+    
+    </div>
+    
+</body>
+</html>
