@@ -20,7 +20,8 @@ class Index extends Backend {
 	 * @return   [type][description]
 	 */
 	public function login() {
-		//$this->view->engine->layout(false);
+		$a = $this->is_layout();
+		//var_dump($a);
 		return $this->fetch();
 	}
 

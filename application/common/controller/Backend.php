@@ -14,9 +14,11 @@ use think\Session;
  * 后台控制器基类
  */
 class Backend extends Controller {
+	protected $noNeedLogin = ['login', 'login_out'];
 
 	//前置方法，校验
 	public function _initialize() {
+		$this->is_layout();
 		$allow_urls = ['index/Index/login', 'index/Users/handel_login', 'index/Index/login_out'];
 		$user = Session::get('user');
 		try {
@@ -97,5 +99,18 @@ class Backend extends Controller {
 		// $this->view->engine->layout(false);
 		Session::set('user', '');
 		return $this->fetch('index/login');
+	}
+
+	/**
+	 *关闭layout
+	 * @Author   王雪
+	 * @DateTime 2020-06-08T09:33:31+0800
+	 * @return   void
+	 */
+	public function is_layout() {
+		//var_dump($this->request->action());
+		if (in_array($this->request->action(), $this->noNeedLogin)) {
+			$this->view->engine->layout(false);
+		}
 	}
 }
